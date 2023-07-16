@@ -20,8 +20,8 @@ contract KarmaDIDVerificationModule is Module {
 
     function run(
         Attestation memory attestation,
-        uint256 value,
-        bytes memory data
+        uint256 /*value*/,
+        bytes memory /*data*/
     ) external override returns (Attestation memory, bytes memory) {
         
         // did

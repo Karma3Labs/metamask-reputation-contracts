@@ -12,8 +12,8 @@ contract SnapsModule is Module {
 
     function run(
         Attestation memory attestation,
-        uint256 value,
-        bytes memory data
+        uint256 /*value*/,
+        bytes memory /*data*/
     ) external pure override returns (Attestation memory, bytes memory) {
         // implement logic here
         Attestation memory a = attestation;
