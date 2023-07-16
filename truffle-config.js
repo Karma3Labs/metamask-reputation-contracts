@@ -93,7 +93,7 @@ module.exports = {
       skipDryRun: true,     // Skip dry run before migrations? (default: false for public nets )
       gas: 4000000
     },
-    development: {
+    'harmony-test': { // Harmony testnet, from https://docs.harmony.one/home/developers/web3-foundations/deploying-on-harmony/using-truffle
       provider: () => new HDWalletProvider(process.env.MNEMONIC, `https://api.s0.b.hmny.io`),
       network_id: '1666700000',       // Linea's id
       confirmations: 1,    // # of confirmations to wait between deployments. (default: 0)
