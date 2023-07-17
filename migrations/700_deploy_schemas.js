@@ -13,7 +13,7 @@ const KarmaAuditAttestor = artifacts.require("KarmaAuditAttestor")
 const KarmaAuditApprovalAttestor = artifacts.require("KarmaAuditApprovalAttestor")
 const KarmaReviewApprovalAttestor = artifacts.require("KarmaReviewApprovalAttestor")
 const KarmaReviewAttestor = artifacts.require("KarmaReviewAttestor")
-
+const KarmaFollowersAttestor = artifacts.require("KarmaFollowersAttestor")
 
 module.exports = async function (deployer, network, accounts) {
     console.log('register schemas')
@@ -28,7 +28,6 @@ module.exports = async function (deployer, network, accounts) {
     const KarmaAuditAttestorSchema = ["snapChecksum", "attestationReport", "isTrustworthy"]
         .map(e => ethers.hexlify(ethers.toUtf8Bytes(e)))
 
-    console.log(KarmaAuditAttestorSchema)
     const res = await sc.registerSchema(KarmaAuditAttestor.address, KarmaAuditAttestorSchema, true, "KarmaAuditAttestorSchema")
     const KarmaAuditAttestorSchemaSchemaId = res.logs[0].args[0][0]
 
@@ -50,8 +49,20 @@ module.exports = async function (deployer, network, accounts) {
     const res4 = await sc.registerSchema(KarmaReviewAttestor.address, KarmaReviewAttestorSchema, true, "KarmaReviewAttestorSchema")
     const KarmaReviewAttestorSchemaId = res4.logs[0].args[0][0]
 
+    const KarmaFollowersAttestorSchema = ["weight"]
+        .map(e => ethers.hexlify(ethers.toUtf8Bytes(e)))
 
-    console.log({ KarmaAuditApprovalAttestorSchemaId, KarmaReviewAttestorSchemaId, KarmaAuditAttestorSchemaSchemaId, KarmaReviewApprovalAttestorSchemaId })
+    const res5 = await sc.registerSchema(KarmaFollowersAttestor.address, KarmaFollowersAttestorSchema, true, "KarmaFollowersAttestorSchema")
+    const KarmaFollowersAttestorSchemaId = res5.logs[0].args[0][0]
+
+
+    console.log({
+        KarmaAuditApprovalAttestorSchemaId,
+        KarmaReviewAttestorSchemaId,
+        KarmaAuditAttestorSchemaSchemaId,
+        KarmaReviewApprovalAttestorSchemaId,
+        KarmaFollowersAttestorSchemaId
+    })
     console.log('SchemasRegistry registerSchema ok')
 
     // deploy test attestation

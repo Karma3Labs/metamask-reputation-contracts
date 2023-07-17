@@ -12,6 +12,7 @@ const KarmaAuditAttestor = artifacts.require("KarmaAuditAttestor")
 const KarmaAuditApprovalAttestor = artifacts.require("KarmaAuditApprovalAttestor")
 const KarmaReviewApprovalAttestor = artifacts.require("KarmaReviewApprovalAttestor")
 const KarmaReviewAttestor = artifacts.require("KarmaReviewAttestor")
+const KarmaFollowersAttestor = artifacts.require("KarmaFollowersAttestor")
 
 
 module.exports = async function (deployer) {
@@ -69,10 +70,21 @@ module.exports = async function (deployer) {
         ]
     )
 
+    await deployer.deploy(
+        KarmaFollowersAttestor,
+        MasterRegistry.address,
+        SchemasRegistry.address,
+        ModulesRegistry.address,
+        [
+            KarmaDIDVerificationModule.address
+        ]
+    )
+
     const attestorsRegistry = await AttestorsRegistry.deployed()
 
     await attestorsRegistry.registerAttestor(KarmaAuditAttestor.address)
     await attestorsRegistry.registerAttestor(KarmaReviewAttestor.address)
     await attestorsRegistry.registerAttestor(KarmaReviewApprovalAttestor.address)
     await attestorsRegistry.registerAttestor(KarmaAuditApprovalAttestor.address)
+    await attestorsRegistry.registerAttestor(KarmaFollowersAttestor.address)
 };
