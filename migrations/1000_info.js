@@ -11,6 +11,7 @@ const KarmaAuditAttestor = artifacts.require("KarmaAuditAttestor")
 const KarmaAuditApprovalAttestor = artifacts.require("KarmaAuditApprovalAttestor")
 const KarmaReviewApprovalAttestor = artifacts.require("KarmaReviewApprovalAttestor")
 const KarmaReviewAttestor = artifacts.require("KarmaReviewAttestor")
+const KarmaFollowersAttestor = artifacts.require("KarmaFollowersAttestor")
 
 module.exports = async function (deployer) {
     const modules = [
@@ -20,6 +21,7 @@ module.exports = async function (deployer) {
         KarmaAuditApprovalAttestor,
         KarmaReviewApprovalAttestor,
         KarmaReviewAttestor,
+        KarmaFollowersAttestor
     ]
 
     console.table(modules.map(m => ({ name: m._json.contractName, address: m.address })))
