@@ -45,7 +45,7 @@ module.exports = async function (deployer) {
         SchemasRegistry.address,
         ModulesRegistry.address,
         [
-            KarmaSnapsRegistryModule.address,
+            // KarmaSnapsRegistryModule.address,
             KarmaDIDVerificationModule.address
         ]
     )
