@@ -91,7 +91,7 @@ module.exports = {
       confirmations: 2,    // # of confirmations to wait between deployments. (default: 0)
       timeoutBlocks: 200,  // # of blocks before a deployment times out  (minimum/default: 50)
       skipDryRun: true,     // Skip dry run before migrations? (default: false for public nets )
-      gas: 50000000
+      gas: 610000000
     },
     'harmony-test': { // Harmony testnet, from https://docs.harmony.one/home/developers/web3-foundations/deploying-on-harmony/using-truffle
       provider: () => new HDWalletProvider(process.env.MNEMONIC, `https://api.s0.b.hmny.io`),

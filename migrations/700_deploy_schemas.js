@@ -25,7 +25,7 @@ module.exports = async function (deployer, network, accounts) {
     await sc.setAttestorsRegistry(AttestorsRegistry.address)
     console.log('SchemasRegistry setAttestorsRegistry ok')
 
-    const KarmaAuditAttestorSchema = ["snapChecksum", "attestationReport", "isTrustworthy"]
+    const KarmaAuditAttestorSchema = ["snapChecksum", "attestationReport", "score", "isTrustworthy"]
         .map(e => ethers.hexlify(ethers.toUtf8Bytes(e)))
 
     const res = await sc.registerSchema(KarmaAuditAttestor.address, KarmaAuditAttestorSchema, true, "KarmaAuditAttestorSchema")
@@ -43,7 +43,7 @@ module.exports = async function (deployer, network, accounts) {
     const res3 = await sc.registerSchema(KarmaReviewApprovalAttestor.address, KarmaReviewApprovalAttestorSchema, true, "KarmaReviewApprovalAttestorSchema")
     const KarmaReviewApprovalAttestorSchemaId = res3.logs[0].args[0][0]
 
-    const KarmaReviewAttestorSchema = ["snapChecksum", "attestationReport", "score"]
+    const KarmaReviewAttestorSchema = ["attestationId", "reviewText", "score"]
         .map(e => ethers.hexlify(ethers.toUtf8Bytes(e)))
 
     const res4 = await sc.registerSchema(KarmaReviewAttestor.address, KarmaReviewAttestorSchema, true, "KarmaReviewAttestorSchema")
