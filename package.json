@@ -11,6 +11,6 @@
     "solc": "^0.8.20",
     "truffle-contract": "^4.0.31",
     "truffle-hdwallet-provider": "^1.0.17",
-    "web3": "^4.0.2"
+    "web3": "^4.0.3"
   }
 }

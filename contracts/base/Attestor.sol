@@ -99,6 +99,9 @@ abstract contract Attestor is IERC165 {
 
         Attestation memory attestation = _buildAttestation(_attestationRequest);
 
+        // todo !! add this line to other delegate attest create/update methods
+        attestation.attester = _signature.signer;
+
         _beforeAttest(attestation, msg.value, _data);
 
         $masterRegistry.attest(attestation);
@@ -218,7 +221,7 @@ abstract contract Attestor is IERC165 {
             messageHash
         );
         _verifySignature(
-            _attestationRequest.attestor,
+            _signature.signer,
             ethSignedMessageHash,
             _signature.v,
             _signature.r,
@@ -324,5 +327,10 @@ abstract contract Attestor is IERC165 {
         return
             interfaceId == type(IERC165).interfaceId ||
             interfaceId == type(Attestor).interfaceId;
+    }
+
+    // todo for demo purpose
+    function getStructHash(AttestationRequest memory data) public pure returns (bytes32) {
+        return keccak256(abi.encode(data));
     }
 }

@@ -8,12 +8,20 @@ const KarmaAttestorV1 = artifacts.require("KarmaAttestorV1")
 const ethers = require('ethers')
 // const storage = require('../src/utils/storage')
 // const { schemas } = require('../src/schemas')
+const web3 = require('web3');
 
 const KarmaAuditAttestor = artifacts.require("KarmaAuditAttestor")
 const KarmaAuditApprovalAttestor = artifacts.require("KarmaAuditApprovalAttestor")
 const KarmaReviewApprovalAttestor = artifacts.require("KarmaReviewApprovalAttestor")
 const KarmaReviewAttestor = artifacts.require("KarmaReviewAttestor")
 const KarmaFollowersAttestor = artifacts.require("KarmaFollowersAttestor")
+
+
+// example addr that delegates the attestation
+const privateKey = '0xf307aaafa38c3215b98b205222c7d89e6d6e02588e798e9586c9c398d8120264';
+const address = '0x9463C644E4eF331ebb715496e848d4F3cEc3F848'
+
+
 
 module.exports = async function (deployer, network, accounts) {
     console.log('register schemas')
@@ -29,7 +37,7 @@ module.exports = async function (deployer, network, accounts) {
         .map(e => ethers.hexlify(ethers.toUtf8Bytes(e)))
 
     const res = await sc.registerSchema(KarmaAuditAttestor.address, KarmaAuditAttestorSchema, true, "KarmaAuditAttestorSchema")
-    const KarmaAuditAttestorSchemaSchemaId = res.logs[0].args[0][0]
+    const KarmaAuditAttestorSchemaId = res.logs[0].args[0][0]
 
     const KarmaAuditApprovalAttestorSchema = ["attestationId", "isApproved"]
         .map(e => ethers.hexlify(ethers.toUtf8Bytes(e)))
@@ -59,7 +67,7 @@ module.exports = async function (deployer, network, accounts) {
     console.log({
         KarmaAuditApprovalAttestorSchemaId,
         KarmaReviewAttestorSchemaId,
-        KarmaAuditAttestorSchemaSchemaId,
+        KarmaAuditAttestorSchemaId,
         KarmaReviewApprovalAttestorSchemaId,
         KarmaFollowersAttestorSchemaId
     })
@@ -76,7 +84,7 @@ module.exports = async function (deployer, network, accounts) {
     // const sa = await SnapsAttestor.deployed()
 
     const attestation = {
-        schemaId: KarmaAuditAttestorSchemaSchemaId,
+        schemaId: KarmaAuditAttestorSchemaId,
         parentId: '0x0000000000000000000000000000000000000000000000000000000000000000',
         attestor: KarmaAuditAttestor.address,
         attestee: accounts[0],
@@ -84,6 +92,29 @@ module.exports = async function (deployer, network, accounts) {
         attestationData
     }
 
+    const hash = await a.getStructHash(attestation)
+
+    const signature = await web3.eth.accounts.sign(hash, privateKey)
+    const { r, s, v } = signature;
+    console.log({ signature })
+
+    try {
+        // second arg array for each module accordingly 
+        const attestationResult = await a.delagatedAttest
+            (
+                attestation,
+                { r, s, v, signer: address },
+                [extraData, extraData]
+            )
+
+        console.log(JSON.stringify(attestationResult, null, 2))
+
+        
+    } catch (e) {
+        console.log(e)
+    }
+
+    /*
     try {
         // second arg array for each module accordingly 
         const attestationResult = await a.attest(attestation, [extraData, extraData])
@@ -91,5 +122,5 @@ module.exports = async function (deployer, network, accounts) {
         console.log(JSON.stringify(attestationResult, null, 2))
     } catch (e) {
         console.log(e)
-    }
+    }*/
 };
