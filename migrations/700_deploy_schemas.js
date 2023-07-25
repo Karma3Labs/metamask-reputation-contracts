@@ -6,8 +6,6 @@ const AttestorsRegistry = artifacts.require("AttestorsRegistry");
 const KarmaSnapsRegistryModule = artifacts.require("KarmaSnapsRegistryModule")
 const KarmaAttestorV1 = artifacts.require("KarmaAttestorV1")
 const ethers = require('ethers')
-// const storage = require('../src/utils/storage')
-// const { schemas } = require('../src/schemas')
 const web3 = require('web3');
 
 const KarmaAuditAttestor = artifacts.require("KarmaAuditAttestor")
@@ -15,7 +13,6 @@ const KarmaAuditApprovalAttestor = artifacts.require("KarmaAuditApprovalAttestor
 const KarmaReviewApprovalAttestor = artifacts.require("KarmaReviewApprovalAttestor")
 const KarmaReviewAttestor = artifacts.require("KarmaReviewAttestor")
 const KarmaFollowersAttestor = artifacts.require("KarmaFollowersAttestor")
-
 
 // example addr that delegates the attestation
 const privateKey = '0xf307aaafa38c3215b98b205222c7d89e6d6e02588e798e9586c9c398d8120264';

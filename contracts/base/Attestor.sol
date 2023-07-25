@@ -99,7 +99,6 @@ abstract contract Attestor is IERC165 {
 
         Attestation memory attestation = _buildAttestation(_attestationRequest);
 
-        // todo !! add this line to other delegate attest create/update methods
         attestation.attester = _signature.signer;
 
         _beforeAttest(attestation, msg.value, _data);
@@ -126,6 +125,7 @@ abstract contract Attestor is IERC165 {
             Attestation memory attestation = _buildAttestation(
                 _attestationRequests[i]
             );
+            attestation.attester = _signatures[i].signer;
 
             _beforeAttest(attestation, value, _data[i]);
 
