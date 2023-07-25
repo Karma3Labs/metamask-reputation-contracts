@@ -90,11 +90,11 @@ module.exports = async function (deployer, network, accounts) {
     const { r, s, v } = signature
 
     try {
-        // second arg array for each module accordingly 
         const attestationResult = await a.delagatedAttest
             (
                 attestation,
                 { r, s, v, signer: address },
+                // arg array for each module accordingly 
                 [extraData, extraData]
             )
 

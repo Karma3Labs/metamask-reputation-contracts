@@ -2,7 +2,6 @@ const MasterRegistry = artifacts.require("MasterRegistry");
 const ModulesRegistry = artifacts.require("ModulesRegistry");
 const SchemasRegistry = artifacts.require("SchemasRegistry");
 const AttestorsRegistry = artifacts.require("AttestorsRegistry");
-const { schemas } = require('../src/schemas')
 const parseLogs = require('../src/utils/parseLogs')
 const KarmaSnapsRegistryModule = artifacts.require("KarmaSnapsRegistryModule")
 // const KarmaAttestorV1 = artifacts.require("KarmaAttestorV1")
