@@ -22,11 +22,8 @@ const privateKey = '0xf307aaafa38c3215b98b205222c7d89e6d6e02588e798e9586c9c398d8
 const address = '0x9463C644E4eF331ebb715496e848d4F3cEc3F848'
 
 
-
 module.exports = async function (deployer, network, accounts) {
     console.log('register schemas')
-
-    // const schema = schemas.snapAttestationSchema(AttestorsRegistry.address, accounts[0])
 
     const sc = await SchemasRegistry.deployed()
 
@@ -81,7 +78,6 @@ module.exports = async function (deployer, network, accounts) {
     // check schemaFields
     const attestationData = ["shasum", "", ""]
         .map(e => ethers.hexlify(ethers.toUtf8Bytes(e)))
-    // const sa = await SnapsAttestor.deployed()
 
     const attestation = {
         schemaId: KarmaAuditAttestorSchemaId,
@@ -93,10 +89,8 @@ module.exports = async function (deployer, network, accounts) {
     }
 
     const hash = await a.getStructHash(attestation)
-
     const signature = await web3.eth.accounts.sign(hash, privateKey)
-    const { r, s, v } = signature;
-    console.log({ signature })
+    const { r, s, v } = signature
 
     try {
         // second arg array for each module accordingly 
@@ -109,7 +103,7 @@ module.exports = async function (deployer, network, accounts) {
 
         console.log(JSON.stringify(attestationResult, null, 2))
 
-        
+
     } catch (e) {
         console.log(e)
     }
