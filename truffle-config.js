@@ -92,14 +92,25 @@ module.exports = {
       timeoutBlocks: 200,  // # of blocks before a deployment times out  (minimum/default: 50)
       skipDryRun: true,     // Skip dry run before migrations? (default: false for public nets )
       gas: 610000000
-    },
+    },//
     'harmony-test': { // Harmony testnet, from https://docs.harmony.one/home/developers/web3-foundations/deploying-on-harmony/using-truffle
       provider: () => new HDWalletProvider(process.env.MNEMONIC, `https://api.s0.b.hmny.io`),
       network_id: '1666700000',       // Linea's id
-      confirmations: 1,    // # of confirmations to wait between deployments. (default: 0)
+      confirmations: 2,    // # of confirmations to wait between deployments. (default: 0)
       timeoutBlocks: 200,  // # of blocks before a deployment times out  (minimum/default: 50)
-      // gas: 1000000
-      skipDryRun: true     // Skip dry run before migrations? (default: false for public nets )
+      // gas: 50000000,
+      skipDryRun: true,    // Skip dry run before migrations? (default: false for public nets )
+      networkCheckTimeout: 1000000,
+    },
+    'harmony-test-ws': { // Harmony testnet, from https://docs.harmony.one/home/developers/web3-foundations/deploying-on-harmony/using-truffle
+      provider: () => new HDWalletProvider(process.env.MNEMONIC, `wss://ws.s0.pops.one`),
+      network_id: '1666700000',       // Linea's id
+      confirmations: 2,    // # of confirmations to wait between deployments. (default: 0)
+      timeoutBlocks: 200,  // # of blocks before a deployment times out  (minimum/default: 50)
+      websocket: true,
+      // gas: 50000000,
+      skipDryRun: true,    // Skip dry run before migrations? (default: false for public nets )
+      networkCheckTimeout: 1000000,
     },
     //
     // Useful for private networks
