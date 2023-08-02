@@ -1,6 +1,3 @@
-
-
-// 
 (async function () {
     const ethers = require('ethers')
     const web3 = require('web3');
@@ -8,8 +5,8 @@
     const dotenv = require('dotenv')
     dotenv.config()
 
-    const privateKey = '0xf307aaafa38c3215b98b205222c7d89e6d6e02588e798e9586c9c398d8120264';
-    const address = '0x9463C644E4eF331ebb715496e848d4F3cEc3F848'
+    const privateKey = '0x171fa7477b1a93c8fff36d819ea71083fb4b96fa60a11e7137659617f9870d93';
+    const address = '0x2A491dbF285865EF48657C61D5984EB65bFb36E9'
 
     const extraData = web3.utils.asciiToHex("")
 
@@ -22,10 +19,10 @@
     const a = new ethers.Contract('0x3b982C0D9823c83A36CE4A4F56FD99bf4eD52f74', karmaAttestorABI, wallet);
 
     const attestation = {
-        schemaId: '0xe5a7770338a054cbaebd58544d9ec3c7417f65f00715c5b43e505d8bd0526659',
+        schemaId: '0x773236b8187b160b8c47b5af2f5c4b7c647208386782aa7c9805e85b711ca9c9',
         parentId: '0x0000000000000000000000000000000000000000000000000000000000000000',
-        attestor: '0x3b982C0D9823c83A36CE4A4F56FD99bf4eD52f74',
-        attestee: '0x9463C644E4eF331ebb715496e848d4F3cEc3F848',
+        attestor: '0xBfa9dc7c9b9B0fabE32Bb120FB3C309b9e7E300e',
+        attestee: '0x1377bB115fA26FF9aCBE81d5b827d4f4eb8097dF',
         expirationDate: 0,
         attestationData
     }
@@ -35,5 +32,5 @@
     const signature = await web3.eth.accounts.sign(hash, privateKey)
     const { r, s, v } = signature
 
-    console.log({signer: address, ...signature}, attestation)
+    console.log({attestation, signature: { signer: address, r, s, v }, extra: [extraData]})
 }())
