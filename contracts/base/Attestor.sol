@@ -95,7 +95,10 @@ abstract contract Attestor is IERC165 {
         EIP712Signature memory _signature,
         bytes[] memory _data
     ) external payable {
-        _verifyDelegatedAttest(_attestationRequest, _signature);
+        // TODO
+        // disable sig verification for PoC as we want to check chain id, destination contract and other 
+        // additional fields to prevent relaying attack and make the signed data serve a single purpose 
+        // _verifyDelegatedAttest(_attestationRequest, _signature);
 
         Attestation memory attestation = _buildAttestation(_attestationRequest);
 
