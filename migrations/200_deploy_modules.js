@@ -7,7 +7,7 @@ const KarmaDIDVerificationModule = artifacts.require("KarmaDIDVerificationModule
 const SnapsRegistry = artifacts.require("SnapsRegistry")
 
 module.exports = async function (deployer) {
-    await deployer.deploy(
+   await deployer.deploy(
         KarmaSnapsRegistryModule,
         MasterRegistry.address,
         SchemasRegistry.address,

@@ -16,17 +16,14 @@ const KarmaFollowersAttestor = artifacts.require("KarmaFollowersAttestor")
 
 
 module.exports = async function (deployer) {
-    /*
-    await deployer.deploy(
-        KarmaAttestorV1,
+    console.log([
         MasterRegistry.address,
         SchemasRegistry.address,
         ModulesRegistry.address,
-        [
-            KarmaSnapsRegistryModule.address,
-            KarmaDIDVerificationModule.address
-        ]
-    );*/
+        KarmaSnapsRegistryModule.address,
+        KarmaDIDVerificationModule.address
+
+    ]);
 
     await deployer.deploy(
         KarmaAuditAttestor,
